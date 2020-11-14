@@ -15,3 +15,9 @@ def readout():
 
     return co2, tvoc, temp
 
+
+def warning():
+
+    if(ccs811.eco2 > 1000):
+
+        return True

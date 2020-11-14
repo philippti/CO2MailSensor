@@ -3,10 +3,11 @@ import smtplib
 from email.mime.text import MIMEText
 import re
 from sensor_readout import readout
+from sensor_readout import warning
 
 
 username = "getmyairquality@gmail.com"
-password = "NS\w*]Cc.(#p8?F\F;ni"
+password = yourPassword
 
 def fetch_mail():
 
@@ -64,3 +65,19 @@ def answer():
     server.quit()
 
 answer()
+
+# if(warning()):
+
+#     smtp_ssl_host = 'smtp.gmail.com'  
+#     smtp_ssl_port = 465
+#     sender = 'yourtrigger@address.com'
+
+#     msg = MIMEText("Please let fresh air in!")
+#     msg['Subject'] = "WARNING "*3
+#     msg['From'] = sender
+#     msg['To'] = "your@mail.com"
+
+#     server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)
+#     server.login(username, password)
+#     server.sendmail(sender, "your@mail.com", msg.as_string() )
+
