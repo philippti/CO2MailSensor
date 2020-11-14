@@ -6,7 +6,7 @@ from sensor_readout import readout
 from sensor_readout import warning
 
 
-username = "getmyairquality@gmail.com"
+username = yourtrigger@mail.com
 password = yourPassword
 
 def fetch_mail():
