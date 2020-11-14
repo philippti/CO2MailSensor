@@ -15,4 +15,3 @@ def readout():
 
     return co2, tvoc, temp
 
-print(readout())
