@@ -64,5 +64,3 @@ def answer():
     server.quit()
 
 answer()
-
-print(readout())
