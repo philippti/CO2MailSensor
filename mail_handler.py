@@ -34,7 +34,7 @@ def fetch_mail():                                           # method for getting
             addresses = (re.search('<(.*?)>', sender).group(1))                     # extract only mail addresses using regex
             sender_list.append(addresses)                                           # save all addresses in sender_list
         
-        sender_list = list(set(sender_list))                                        # eliminate all multiple entries for not answering the same mail more than once
+        sender_list = list(set(sender_list))                                        # eliminate all multiple entries to send only one answer to each sender
         
         return sender_list
     return get_sender_addresses()
