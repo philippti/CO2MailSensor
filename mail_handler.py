@@ -16,7 +16,7 @@
 ==============================================================================================================================================================================================
 """
 
-""" Imports """
+""" imports """
 
 import imaplib                                              # imaplib and smtplip are used to connect to the server and fetching the email contents
 import smtplib                                              
@@ -99,4 +99,4 @@ def main():
 """ main function """
 
 if __name__ == "__main__":
-    main()                              
+    main()
