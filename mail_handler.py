@@ -28,8 +28,8 @@ from sensor_readout import readout                          # import the custom 
 
 """ login credentials """
 
-username = "getmyairquality@gmail.com"                      # login credentials for the used email address. These have to be customized
-password = "NS\w*]Cc.(#p8?F\F;ni"
+username = "yourtrigger@mail.com"                      # login credentials for the used email address. These have to be customized
+password = "yourpassword"
 
 
 
