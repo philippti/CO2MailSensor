@@ -1,7 +1,21 @@
+# Serves as the main script, where the answer method serves as the main function. 
+# 
+# This script is used to connect to a mail server using SSL 
+# The mail is fetched and the sender addresses are extracted to send an answer to
+# The fetch_mail method only fetches unseen mails and the returns a list of all sender addresses where multiple entries of the same address
+# were removed, to avoid multiple answers to the same address
+# 
+# The sensor readout is handled in the sensor_readout script. The sensor used here is the CCS811.
+# The sensor measures the amount of total volatile organic compounds (TVOC) and calculates an equivalent carbon dioxide concentration.
+# This calculation is done by assuming the use of the sensor is indoors and the main producer of CO2 are humans
+# 
+# author: philippti
+# date: 20.11.2020
+
 import imaplib
 import smtplib
-from email.mime.text import MIMEText
-import re
+from email.mime.text import MIMEText                        # MIMEText is used to compose the eMail
+import re                                                   # regular expressions are used to extract the mail addresses
 from sensor_readout import readout                          # import the custom module for reading the sensor data
 from sensor_readout import warning
 
@@ -64,7 +78,7 @@ def answer():
 
     server.quit()
 
-answer()                                                    # answer() serves as a kind of main function
+answer()                                                    # answer() serves as the main function
 
 # if(warning()):                                            # optional warning system if CO2 concentration in the rooms reaches a set threshold
                                                             # omitted here, because sensor does not work reliable, avoiding a lot of spam mail
