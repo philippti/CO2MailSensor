@@ -12,16 +12,54 @@
 # author: philippti
 # date: 20.11.2020
 
-import imaplib
-import smtplib
+"""
+==============================================================================================================================================================================================
+"""
+
+""" Imports """
+
+import imaplib                                              # imaplib and smtplip are used to connect to the server and fetching the email contents
+import smtplib                                              
 from email.mime.text import MIMEText                        # MIMEText is used to compose the eMail
 import re                                                   # regular expressions are used to extract the mail addresses
 from sensor_readout import readout                          # import the custom module for reading the sensor data
-from sensor_readout import warning
 
 
-username = yourtrigger@mail.com                             # login credentials for the used email address
-password = yourPassword
+
+""" login credentials """
+
+username = "getmyairquality@gmail.com"                      # login credentials for the used email address. These have to be customized
+password = "NS\w*]Cc.(#p8?F\F;ni"
+
+
+
+""" function definitions """
+
+
+def answer():
+
+    sensor = readout()                                      # get the sensor data in a tuple from the custom sensor_readout.py module
+    
+    smtp_ssl_host = 'smtp.gmail.com'                        # host smtp server of the used mail provider (gmail is used here)
+    smtp_ssl_port = 465                                     # SSL port used by SMTP
+
+    server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port) # establishing SSL secured smtp connection
+    server.login(username, password)
+
+    target = fetch_mail()                                   # get the mail addresses
+    text = "Hello you, \n Thanks for requesting the air quality in Timos room. \n\n CO2: {} ppm  \n TVOC: {} ppb \n Temperature: {:4.2f} °C \n\n Thanks for asking and have a nice day!".format(sensor[0], sensor[1], sensor[2])
+
+    for i in enumerate(target):                             # answering all mail addresses in target 
+        msg = MIMEText(text)
+        msg['Subject'] = "Air quality in Timo's room"
+        msg['From'] = username
+        msg['To'] = i[1]
+
+        server.sendmail(username, i[1], msg.as_string())
+
+    server.quit()
+
+
 
 def fetch_mail():                                           # method for getting incoming mail, extracting sender address and saving them
 
@@ -53,45 +91,12 @@ def fetch_mail():                                           # method for getting
         return sender_list
     return get_sender_addresses()
 
-   
-def answer():
 
-    sensor = readout()                                      # get the sensor data in a tuple
-    
-    smtp_ssl_host = 'smtp.gmail.com'                        # sending mail via smtp (if gmail is used)
-    smtp_ssl_port = 465
-    sender = 'getmyairquality@gmail.com'
+def main():
+    answer()                        # answer() serves as the main function
 
-    server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port) # establishing SSL secured smtp connection
-    server.login(username, password)
 
-    target = fetch_mail()                                   # get the mail addresses
-    text = "Hello you, \n Thanks for requesting the air quality in Timos room. \n\n CO2: {} ppm  \n TVOC: {} ppb \n Temperature: {:4.2f} °C \n\n Thanks for asking and have a nice day!".format(sensor[0], sensor[1], sensor[2])
+""" main function """
 
-    for i in enumerate(target):                             # answering all mail addresses in target 
-        msg = MIMEText(text)
-        msg['Subject'] = "Air quality in Timo's room"
-        msg['From'] = sender
-        msg['To'] = i[1]
-
-        server.sendmail(sender, i[1], msg.as_string())
-
-    server.quit()
-
-answer()                                                    # answer() serves as the main function
-
-# if(warning()):                                            # optional warning system if CO2 concentration in the rooms reaches a set threshold
-                                                            # omitted here, because sensor does not work reliable, avoiding a lot of spam mail
-#     smtp_ssl_host = 'smtp.gmail.com'  
-#     smtp_ssl_port = 465
-#     sender = 'yourtrigger@address.com'
-
-#     msg = MIMEText("Please let fresh air in!")
-#     msg['Subject'] = "WARNING "*3
-#     msg['From'] = sender
-#     msg['To'] = "your@mail.com"
-
-#     server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)
-#     server.login(username, password)
-#     server.sendmail(sender, "your@mail.com", msg.as_string() )
-
+if __name__ == "__main__":
+    main()                              
