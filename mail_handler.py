@@ -28,7 +28,7 @@ from sensor_readout import readout                          # import the custom 
 
 """ login credentials """
 
-username = "yourtrigger@mail.com"                      # login credentials for the used email address. These have to be customized
+username = "yourtrigger@mail.com"                           # login credentials for the used email address. These have to be customized
 password = "yourpassword"
 
 
