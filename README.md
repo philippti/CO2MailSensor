@@ -1,7 +1,6 @@
 <h1> CO2 Sensor with mail-trigger on a Raspberry Pi </h1>
 
 <h2> Implementation of a triggered eMail client for reading CO2 concentration in a room </h2>
-<hr/>
 
 This code was written for the "Introduction to Programming" lecture at the DHBW Lörrach.
 
