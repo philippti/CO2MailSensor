@@ -35,6 +35,9 @@ password = "yourpassword"
 
 """ function definitions """
 
+def main():
+    answer()                                                 # answer() serves as the main function
+
 
 def answer():
 
@@ -91,9 +94,6 @@ def fetch_mail():                                           # method for getting
         return sender_list
     return get_sender_addresses()
 
-
-def main():
-    answer()                        # answer() serves as the main function
 
 
 """ main function """
