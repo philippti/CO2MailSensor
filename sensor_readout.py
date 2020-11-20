@@ -24,7 +24,7 @@ i2c = busio.I2C(board.SCL, board.SDA)       # initialize the I2C Bus of the Pi, 
 ccs811 = adafruit_ccs811.CCS811(i2c)        # initialize the sensor using the module for the breakout board provided by Adafruit
 
 
-""" funcions """
+""" functions """
 
 def readout():                              # simple method to readout the values of the sensor
 
