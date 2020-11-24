@@ -72,7 +72,7 @@ def fetch_mail():                                           # method for getting
 
     def get_unseen_mail_ids():                               
 
-        check1, data1 = imap.search(None, "(UNSEEN)")       # search for all unseen mails in the inbox
+        check1, data1 = imap.search(None, "UNSEEN")       # search for all unseen mails in the inbox
         mail_ids = re.findall(r'\d', str(data1))            # extract the id's as a list of only numbers, hence the use of regex
 
         return mail_ids
@@ -84,7 +84,7 @@ def fetch_mail():                                           # method for getting
         sender_list = []                                    # empty list for saving the mail addresses of all unanswered mails
 
         for i in ids:                                       # iteration over all mails to answer
-            check2, data2 = imap.fetch(str(i) , "(BODY[HEADER.FIELDS (FROM)])")     # saving the header of the mail in data2, sets the \Seen flag 
+            check2, data2 = imap.fetch(str(i) , "BODY[HEADER]")     # saving the header of the mail in data2, sets the \Seen flag 
             sender = str(data2)                                                     # save raw parsed string from imap.fetch
             addresses = (re.search('<(.*?)>', sender).group(1))                     # extract only mail addresses using regex
             sender_list.append(addresses)                                           # save all addresses in sender_list
